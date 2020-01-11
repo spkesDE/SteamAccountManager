@@ -124,66 +124,65 @@ namespace SteamAccountManager {
             panel.DoubleClick += new EventHandler(this.onGameDoubleClick);
             g.mainPanel = panel;
 
-            Panel bottomPanel = new Panel();
+            /*Panel bottomPanel = new Panel();
             panel.Controls.Add(bottomPanel);
             bottomPanel.BackColor = Color.FromArgb(100, 100, 100, 100);
             bottomPanel.Location = new Point(0, 275);
             bottomPanel.Size = new Size(200, 25);
-            g.bottomPanel = bottomPanel;
+            g.bottomPanel = bottomPanel;*/
 
 
             Label gameName = new Label();
-            bottomPanel.Controls.Add(gameName);
-            gameName.Location = new Point(6, 6);
+            panel.Controls.Add(gameName);
+            gameName.Location = new Point(0, 275);
             gameName.Name = g.name;
-            gameName.BackColor = Color.FromArgb(0, 0, 0, 0);
+            gameName.BackColor = Color.FromArgb(100, 100, 100, 100);
             gameName.ForeColor = Color.FromArgb(255, 255, 255, 255);
-            gameName.Size = new Size(180, 13);
+            gameName.Padding = new Padding(3);
+            gameName.Size = new Size(200, 25);
+            gameName.AutoSize = false;
+            gameName.TextAlign = ContentAlignment.MiddleCenter;
             gameName.MouseClick += (sender, e) => gameName_ToolTip(sender, e, g);
             gameName.Text = g.name;
             g.gameName = gameName;
 
-            Panel topPanel = new Panel();
+            /*Panel topPanel = new Panel();
             panel.Controls.Add(topPanel);
             topPanel.BackColor = Color.FromArgb(100, 100, 100, 100);
             topPanel.Location = new Point(0, 0);
             topPanel.Name = "topPanel2";
             topPanel.Size = new Size(200, 25);
-            g.topPanel = topPanel;
+            g.topPanel = topPanel;*/
 
             Label accountName = new Label();
-            topPanel.Controls.Add(accountName);
-            accountName.Location = new Point(6, 6);
+            panel.Controls.Add(accountName);
+            accountName.Location = new Point(0, 0);
             accountName.Name = "accountName2";
-            accountName.Size = new Size(191, 13);
-            accountName.BackColor = Color.FromArgb(0, 0, 0, 0);
+            accountName.Size = new Size(200, 25);
+            accountName.Padding = new Padding(3);
+            accountName.BackColor = Color.FromArgb(100, 100, 100, 100);
             accountName.ForeColor = Color.FromArgb(255, 255, 255, 255);
+            accountName.TextAlign = ContentAlignment.MiddleCenter;
             accountName.Text = acc.accountName;
             g.accountLabel = accountName;
             g.accountName = acc.accountName;
 
-            Panel ripPanel = new Panel();
-            panel.Controls.Add(ripPanel);
-            ripPanel.BackColor = Color.FromArgb(180, 255, 0, 0);
-            ripPanel.Location = new Point(158, 52);
-            ripPanel.Name = "ripPanel";
-            ripPanel.Size = new Size(42, 25);
-            g.ripPanel = ripPanel;
-
             Label ripLabel = new Label();
-            ripPanel.Controls.Add(ripLabel);
+            panel.Controls.Add(ripLabel);
             ripLabel.AutoSize = true;
-            ripLabel.Location = new Point(3, 6);
-            ripLabel.Name = "rip2";
+            ripLabel.Location = new Point(0, 60);
+            ripLabel.Padding = new Padding(3);
+            ripLabel.Name = "ripLabel";
             ripLabel.Size = new Size(37, 13);
-            ripLabel.BackColor = Color.FromArgb(0, 0, 0, 0);
+            ripLabel.BackColor = Color.FromArgb(180, 255, 0, 0);
+            ripLabel.TextAlign = ContentAlignment.MiddleCenter;
             ripLabel.Text = config.bannedText;
             g.ripLabel = ripLabel;
 
             #endregion
 
             if(!g.banned)
-                ripPanel.Visible = false;
+                ripLabel.Visible = false;
             this.panelGame.Add(panel, g);
             panelAccount.Add(panel, acc);
             if(File.Exists(Application.StartupPath + "/data/" + acc.accountName + "/" + g.appid + "/cover.jpg")) {
@@ -308,25 +307,13 @@ namespace SteamAccountManager {
                 Controls.Remove(game.ripLabel);
                 game.ripLabel.Dispose();
 
-                game.ripPanel.Hide();
-                Controls.Remove(game.ripPanel);
-                game.ripPanel.Dispose();
-
                 game.accountLabel.Hide();
                 Controls.Remove(game.accountLabel);
                 game.accountLabel.Dispose();
 
-                game.topPanel.Hide();
-                Controls.Remove(game.topPanel);
-                game.topPanel.Dispose();
-
                 game.gameName.Hide();
                 Controls.Remove(game.gameName);
                 game.gameName.Dispose();
-
-                game.bottomPanel.Hide();
-                Controls.Remove(game.bottomPanel);
-                game.bottomPanel.Dispose();
 
                 game.mainPanel.Hide();
                 Controls.Remove(game.mainPanel);
@@ -470,9 +457,9 @@ namespace SteamAccountManager {
                 item.Checked = !item.Checked;
                 Game g = panelGame[lastHovedPanel];
                 g.banned = item.Checked;
-                var ripPanel = lastHovedPanel.Controls.Find("ripPanel", false).FirstOrDefault();
-                if(ripPanel != null) {
-                    ripPanel.Visible = item.Checked;
+                var ripLabel = lastHovedPanel.Controls.Find("ripLabel", false).FirstOrDefault();
+                if(ripLabel != null) {
+                    ripLabel.Visible = item.Checked;
                 }
                 File.WriteAllText(Application.StartupPath + "/data/" + g.accountName + "/" + g.appid + "/gameData.json", JsonConvert.SerializeObject(g));
             }

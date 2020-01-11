@@ -33,6 +33,7 @@ namespace SteamAccountManager
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.panelCover = new System.Windows.Forms.Panel();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.theme = new NSTheme();
             this.minimizeBtn = new NSButton();
             this.searchBtn = new NSButtonRed();
@@ -62,10 +63,8 @@ namespace SteamAccountManager
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.selectSteamExToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectPlaceholderCoverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ripPanel = new System.Windows.Forms.Panel();
             this.rip2 = new System.Windows.Forms.Label();
-            this.topPanel2 = new System.Windows.Forms.Panel();
-            this.accountName2 = new System.Windows.Forms.Label();
+            this.ripPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gameName2 = new System.Windows.Forms.Label();
             this.closeBtn = new NSButton();
@@ -73,13 +72,11 @@ namespace SteamAccountManager
             this.trayContext = new NSContextMenu();
             this.openPoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.theme.SuspendLayout();
             this.flowPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.contextMenu.SuspendLayout();
-            this.ripPanel.SuspendLayout();
-            this.topPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.trayContext.SuspendLayout();
             this.SuspendLayout();
@@ -90,6 +87,13 @@ namespace SteamAccountManager
             this.panelCover.Name = "panelCover";
             this.panelCover.Size = new System.Drawing.Size(200, 100);
             this.panelCover.TabIndex = 1;
+            // 
+            // toolTip
+            // 
+            this.toolTip.AutomaticDelay = 50;
+            this.toolTip.AutoPopDelay = 2500;
+            this.toolTip.InitialDelay = 50;
+            this.toolTip.ReshowDelay = 10;
             // 
             // theme
             // 
@@ -183,8 +187,9 @@ namespace SteamAccountManager
             // panel1
             // 
             this.panel1.ContextMenuStrip = this.contextMenu;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.rip2);
             this.panel1.Controls.Add(this.ripPanel);
-            this.panel1.Controls.Add(this.topPanel2);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
@@ -376,40 +381,32 @@ namespace SteamAccountManager
             this.selectPlaceholderCoverToolStripMenuItem.Text = "Select placeholder cover (200x300)";
             this.selectPlaceholderCoverToolStripMenuItem.Click += new System.EventHandler(this.selectPlaceholderCoverToolStripMenuItem_Click);
             // 
-            // ripPanel
-            // 
-            this.ripPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.ripPanel.Controls.Add(this.rip2);
-            this.ripPanel.Location = new System.Drawing.Point(158, 52);
-            this.ripPanel.Name = "ripPanel";
-            this.ripPanel.Size = new System.Drawing.Size(42, 25);
-            this.ripPanel.TabIndex = 3;
-            // 
             // rip2
             // 
+            this.rip2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.rip2.AutoSize = true;
-            this.rip2.Location = new System.Drawing.Point(3, 6);
+            this.rip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.rip2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rip2.Location = new System.Drawing.Point(0, 71);
+            this.rip2.Margin = new System.Windows.Forms.Padding(0);
             this.rip2.Name = "rip2";
-            this.rip2.Size = new System.Drawing.Size(37, 13);
-            this.rip2.TabIndex = 1;
+            this.rip2.Padding = new System.Windows.Forms.Padding(3);
+            this.rip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.rip2.Size = new System.Drawing.Size(45, 19);
+            this.rip2.TabIndex = 0;
             this.rip2.Text = "R.I.P.";
+            this.rip2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // topPanel2
+            // ripPanel
             // 
-            this.topPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.topPanel2.Controls.Add(this.accountName2);
-            this.topPanel2.Location = new System.Drawing.Point(0, 0);
-            this.topPanel2.Name = "topPanel2";
-            this.topPanel2.Size = new System.Drawing.Size(200, 25);
-            this.topPanel2.TabIndex = 2;
-            // 
-            // accountName2
-            // 
-            this.accountName2.Location = new System.Drawing.Point(6, 6);
-            this.accountName2.Name = "accountName2";
-            this.accountName2.Size = new System.Drawing.Size(191, 13);
-            this.accountName2.TabIndex = 1;
-            this.accountName2.Text = "Squad";
+            this.ripPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ripPanel.AutoSize = true;
+            this.ripPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ripPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.ripPanel.Location = new System.Drawing.Point(200, 52);
+            this.ripPanel.Name = "ripPanel";
+            this.ripPanel.Size = new System.Drawing.Size(0, 0);
+            this.ripPanel.TabIndex = 3;
             // 
             // panel2
             // 
@@ -470,12 +467,16 @@ namespace SteamAccountManager
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
-            // toolTip
+            // label1
             // 
-            this.toolTip.AutomaticDelay = 50;
-            this.toolTip.AutoPopDelay = 2500;
-            this.toolTip.InitialDelay = 50;
-            this.toolTip.ReshowDelay = 10;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(3);
+            this.label1.Size = new System.Drawing.Size(200, 25);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Squad";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainWindow
             // 
@@ -492,10 +493,8 @@ namespace SteamAccountManager
             this.theme.ResumeLayout(false);
             this.flowPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.contextMenu.ResumeLayout(false);
-            this.ripPanel.ResumeLayout(false);
-            this.ripPanel.PerformLayout();
-            this.topPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.trayContext.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -524,8 +523,6 @@ namespace SteamAccountManager
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel ripPanel;
         private System.Windows.Forms.Label rip2;
-        private System.Windows.Forms.Panel topPanel2;
-        private System.Windows.Forms.Label accountName2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label gameName2;
         private NSButton minimizeBtn;
@@ -546,6 +543,7 @@ namespace SteamAccountManager
         private System.Windows.Forms.ToolStripMenuItem openPoolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Label label1;
     }
 }
 

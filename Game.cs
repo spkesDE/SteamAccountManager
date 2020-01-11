@@ -45,15 +45,9 @@ namespace SteamAccountManager
         [JsonIgnore]
         public Panel mainPanel { get; set; }
         [JsonIgnore]
-        public Panel bottomPanel { get; set; }
-        [JsonIgnore]
         public Label gameName { get; set; }
         [JsonIgnore]
-        public Panel topPanel { get; set; }
-        [JsonIgnore]
         public Label accountLabel { get; set; }
-        [JsonIgnore]
-        public Panel ripPanel { get; set; }
         [JsonIgnore]
         public Label ripLabel { get; set; }
 
