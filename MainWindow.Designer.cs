@@ -73,6 +73,7 @@ namespace SteamAccountManager
             this.trayContext = new NSContextMenu();
             this.openPoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.theme.SuspendLayout();
             this.flowPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -426,6 +427,7 @@ namespace SteamAccountManager
             this.gameName2.Size = new System.Drawing.Size(191, 13);
             this.gameName2.TabIndex = 1;
             this.gameName2.Text = "Squad";
+            this.gameName2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // closeBtn
             // 
@@ -452,21 +454,28 @@ namespace SteamAccountManager
             this.openPoolStripMenuItem,
             this.closeToolStripMenuItem});
             this.trayContext.Name = "nsContextMenu1";
-            this.trayContext.Size = new System.Drawing.Size(181, 70);
+            this.trayContext.Size = new System.Drawing.Size(104, 48);
             // 
             // openPoolStripMenuItem
             // 
             this.openPoolStripMenuItem.Name = "openPoolStripMenuItem";
-            this.openPoolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openPoolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openPoolStripMenuItem.Text = "Open";
             this.openPoolStripMenuItem.Click += new System.EventHandler(this.openPoolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            // 
+            // toolTip
+            // 
+            this.toolTip.AutomaticDelay = 50;
+            this.toolTip.AutoPopDelay = 2500;
+            this.toolTip.InitialDelay = 50;
+            this.toolTip.ReshowDelay = 10;
             // 
             // MainWindow
             // 
@@ -536,6 +545,7 @@ namespace SteamAccountManager
         private NSContextMenu trayContext;
         private System.Windows.Forms.ToolStripMenuItem openPoolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 

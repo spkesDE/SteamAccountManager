@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -138,6 +139,7 @@ namespace SteamAccountManager {
             gameName.BackColor = Color.FromArgb(0, 0, 0, 0);
             gameName.ForeColor = Color.FromArgb(255, 255, 255, 255);
             gameName.Size = new Size(180, 13);
+            gameName.MouseClick += (sender, e) => gameName_ToolTip(sender, e, g);
             gameName.Text = g.name;
             g.gameName = gameName;
 
@@ -253,7 +255,7 @@ namespace SteamAccountManager {
                                 g.usesPlaceholder = true;
                             }
                         }
-                    } catch (WebException e){
+                    } catch (WebException){
                         Debug.WriteLine("[" + g.accountName + "] AppId was not found on SteamGridDb: " + g.appid);
                         g.usesPlaceholder = true;
                     }
@@ -353,7 +355,7 @@ namespace SteamAccountManager {
                 }
                 addContextMenuItem(acc);
                 File.WriteAllText(Application.StartupPath + "/data/" + name + "/accountData.json", JsonConvert.SerializeObject(acc));
-            new ErrorWindow("Account got added. Downloading covers!", "Done!").Show();
+            new ErrorWindow("API key is valid. Downloading covers!", "Done!").Show();
             } catch {
              new ErrorWindow("Account credentials are not correct").Show();
             }
@@ -433,14 +435,27 @@ namespace SteamAccountManager {
                 if(proc != null)
                     proc.Kill();
                 if(config.onlyLogin) {
-                    Process.Start(config.steamPath, "-login " + panelAccount[lastHovedPanel].accountName + " " + panelAccount[lastHovedPanel].accountPass);
+                    ExecuteAsAdmin(config.steamPath, "-login " + panelAccount[lastHovedPanel].accountName + " " + panelAccount[lastHovedPanel].accountPass);
                 } else {
-                    Process.Start(config.steamPath, "-login " + panelAccount[lastHovedPanel].accountName + " " + panelAccount[lastHovedPanel].accountPass + " -applaunch " + panelGame[lastHovedPanel].appid);
+                    ExecuteAsAdmin(config.steamPath, "-login " + panelAccount[lastHovedPanel].accountName + " " + panelAccount[lastHovedPanel].accountPass + " -applaunch " + panelGame[lastHovedPanel].appid);
                 }
                 if(config.minimize)
                     Hide();
             } else {
                 new ErrorWindow("Steam path is not set! Please set the path to your steam.exe via right click on any game.").Show();
+            }
+        }
+
+        public void ExecuteAsAdmin(string fileName, String arguments = "") {
+            try {
+                Process proc = new Process();
+                proc.StartInfo.FileName = fileName;
+                proc.StartInfo.Arguments = arguments;
+                proc.StartInfo.Verb = "runas";
+                proc.Start();
+            } catch (Win32Exception) {
+                if(config.minimize)
+                    Show();
             }
         }
 
@@ -610,6 +625,10 @@ namespace SteamAccountManager {
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e) {
             this.Close();
+        }
+
+        private void gameName_ToolTip(object sender, MouseEventArgs e, Game g) {
+            toolTip.SetToolTip((Label)sender, g.name);
         }
     }
 }
