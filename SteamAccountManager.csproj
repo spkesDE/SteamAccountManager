@@ -96,6 +96,12 @@
     <Compile Include="AddAccountWindow.Designer.cs">
       <DependentUpon>AddAccountWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="SetupWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetupWizard.Designer.cs">
+      <DependentUpon>SetupWizard.cs</DependentUpon>
+    </Compile>
     <Compile Include="SteamGridDB.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="MainWindow.cs">
@@ -130,6 +136,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetupWizard.resx">
+      <DependentUpon>SetupWizard.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

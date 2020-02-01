@@ -1,9 +1,7 @@
 ﻿using System;
 
-namespace SteamAccountManager
-{
-    partial class MainWindow
-    {
+namespace SteamAccountManager {
+    partial class MainWindow {
         /// <summary>
         /// Erforderliche Designervariable.
         /// </summary>
@@ -13,10 +11,8 @@ namespace SteamAccountManager
         /// Verwendete Ressourcen bereinigen.
         /// </summary>
         /// <param name="disposing">True, wenn verwaltete Ressourcen gelöscht werden sollen; andernfalls False.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if(disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -28,8 +24,7 @@ namespace SteamAccountManager
         /// Erforderliche Methode für die Designerunterstützung.
         /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.panelCover = new System.Windows.Forms.Panel();
@@ -63,6 +58,7 @@ namespace SteamAccountManager
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.selectSteamExToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectPlaceholderCoverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
             this.rip2 = new System.Windows.Forms.Label();
             this.ripPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -72,7 +68,8 @@ namespace SteamAccountManager
             this.trayContext = new NSContextMenu();
             this.openPoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lauchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.theme.SuspendLayout();
             this.flowPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -201,11 +198,13 @@ namespace SteamAccountManager
             // 
             this.contextMenu.ForeColor = System.Drawing.Color.White;
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lauchToolStripMenuItem,
+            this.loginToolStripMenuItem,
             this.accountMenuItem,
             this.gameToolStripMenuItem,
             this.settingsToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(120, 70);
+            this.contextMenu.Size = new System.Drawing.Size(181, 136);
             // 
             // accountMenuItem
             // 
@@ -213,7 +212,7 @@ namespace SteamAccountManager
             this.addToolStripMenuItem,
             this.toolStripSeparator5});
             this.accountMenuItem.Name = "accountMenuItem";
-            this.accountMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.accountMenuItem.Size = new System.Drawing.Size(180, 22);
             this.accountMenuItem.Text = "Account";
             // 
             // addToolStripMenuItem
@@ -235,7 +234,7 @@ namespace SteamAccountManager
             this.bannedMenuItem,
             this.openCoverFolderToolStripMenuItem});
             this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
-            this.gameToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gameToolStripMenuItem.Text = "Game";
             // 
             // bannedMenuItem
@@ -267,7 +266,7 @@ namespace SteamAccountManager
             this.selectSteamExToolStripMenuItem,
             this.selectPlaceholderCoverToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // steamGridDBToolStripMenuItem
@@ -381,6 +380,17 @@ namespace SteamAccountManager
             this.selectPlaceholderCoverToolStripMenuItem.Text = "Select placeholder cover (200x300)";
             this.selectPlaceholderCoverToolStripMenuItem.Click += new System.EventHandler(this.selectPlaceholderCoverToolStripMenuItem_Click);
             // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(3);
+            this.label1.Size = new System.Drawing.Size(200, 25);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Squad";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // rip2
             // 
             this.rip2.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -467,16 +477,19 @@ namespace SteamAccountManager
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
-            // label1
+            // lauchToolStripMenuItem
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(3);
-            this.label1.Size = new System.Drawing.Size(200, 25);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Squad";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lauchToolStripMenuItem.Name = "lauchToolStripMenuItem";
+            this.lauchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lauchToolStripMenuItem.Text = "Lauch";
+            this.lauchToolStripMenuItem.Click += new System.EventHandler(this.lauchToolStripMenuItem_Click);
+            // 
+            // loginToolStripMenuItem
+            // 
+            this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loginToolStripMenuItem.Text = "Login";
+            this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -544,6 +557,7 @@ namespace SteamAccountManager
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem lauchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
     }
 }
-

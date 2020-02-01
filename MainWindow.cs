@@ -19,16 +19,18 @@ namespace SteamAccountManager {
     public partial class MainWindow : Form {
         Dictionary<Panel, Game> panelGame = new Dictionary<Panel, Game>();
         Dictionary<Panel, Account> panelAccount = new Dictionary<Panel, Account>();
-
         List<Account> accounts = new List<Account>();
         Panel lastHovedPanel;
         Config config;
         int _totalGames = 0;
         public MainWindow() {
+            SuspendLayout();
             InitializeComponent();
             Directory.CreateDirectory(Application.StartupPath + "/data");
             if(File.Exists(Application.StartupPath + "/data/config.json")) {
                 this.config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(Application.StartupPath + "/data/config.json"));
+                this.Left = config.xLocation;
+                this.Top = config.yLocation;
                 loginOnlyToolStripMenuItem.Checked = config.onlyLogin;
                 minimizeOnLauchToolStripMenuItem.Checked = config.minimize;
                 toTrayOnCloseToolStripMenuItem.Checked = config.toTrayOnClose;
@@ -41,6 +43,7 @@ namespace SteamAccountManager {
                 this.config = new Config();
                 File.WriteAllText(Application.StartupPath + "/data/config.json", JsonConvert.SerializeObject(config));
             }
+            ResumeLayout();
 
             string[] accountFolder = Directory.GetDirectories(Application.StartupPath + "/data");
             foreach(var item in accountFolder) {
@@ -98,9 +101,9 @@ namespace SteamAccountManager {
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
-            int nLeftRect, 
-            int nTopRect, 
-            int nRightRect,    
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
             int nBottomRect,
             int nWidthEllipse,
             int nHeightEllipse
@@ -380,6 +383,9 @@ namespace SteamAccountManager {
         }
 
         private void closeBtn_Click(object sender, EventArgs e) {
+            config.xLocation = this.Location.X;
+            config.yLocation = this.Location.Y;
+            File.WriteAllText(Application.StartupPath + "/data/config.json", JsonConvert.SerializeObject(config));
             if(config.toTrayOnClose)
                 Hide();
             else
@@ -417,23 +423,14 @@ namespace SteamAccountManager {
         }
 
         private void onGameDoubleClick(object sender, EventArgs e) {
-            if(config.steamPath != null) {
-                Process proc = Process.GetProcessesByName("steam").FirstOrDefault();
-                if(proc != null)
-                    proc.Kill();
-                if(config.onlyLogin) {
-                    ExecuteAsAdmin(config.steamPath, "-login " + panelAccount[lastHovedPanel].accountName + " " + panelAccount[lastHovedPanel].accountPass);
-                } else {
-                    ExecuteAsAdmin(config.steamPath, "-login " + panelAccount[lastHovedPanel].accountName + " " + panelAccount[lastHovedPanel].accountPass + " -applaunch " + panelGame[lastHovedPanel].appid);
-                }
-                if(config.minimize)
-                    Hide();
-            } else {
-                new ErrorWindow("Steam path is not set! Please set the path to your steam.exe via right click on any game.").Show();
-            }
+            if(config.onlyLogin)
+                lauch(true);
+            else
+                lauch();
         }
 
         public void ExecuteAsAdmin(string fileName, String arguments = "") {
+            Debug.WriteLine(fileName + " " + arguments);
             try {
                 Process proc = new Process();
                 proc.StartInfo.FileName = fileName;
@@ -616,6 +613,37 @@ namespace SteamAccountManager {
 
         private void gameName_ToolTip(object sender, MouseEventArgs e, Game g) {
             toolTip.SetToolTip((Label)sender, g.name);
+        }
+
+        private void lauchToolStripMenuItem_Click(object sender, EventArgs e) {
+            lauch();
+        }
+
+        public void lauch(bool login = false) {
+            if(config.steamPath != null) {
+                Process proc = Process.GetProcessesByName("steam").FirstOrDefault();
+                if(proc != null)
+                    proc.Kill();
+                if(login) {
+                    ExecuteAsAdmin(config.steamPath, "-login " + panelAccount[lastHovedPanel].accountName + " " + panelAccount[lastHovedPanel].accountPass);
+                } else {
+                    ExecuteAsAdmin(config.steamPath, "-login " + panelAccount[lastHovedPanel].accountName + " " + panelAccount[lastHovedPanel].accountPass + " -applaunch " + panelGame[lastHovedPanel].appid);
+                }
+                if(config.minimize)
+                    Hide();
+            } else {
+                new ErrorWindow("Steam path is not set! Please set the path to your steam.exe via right click on any game.").Show();
+            }
+        }
+
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e) {
+            lauch(true);
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e) {
+            config.xLocation = this.Location.X;
+            config.yLocation = this.Location.Y;
+            File.WriteAllText(Application.StartupPath + "/data/config.json", JsonConvert.SerializeObject(config));
         }
     }
 }

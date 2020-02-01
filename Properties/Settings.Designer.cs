@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Drawing;
+
 namespace SteamAccountManager.Properties
 {
 
@@ -26,5 +28,10 @@ namespace SteamAccountManager.Properties
                 return defaultInstance;
             }
         }
+
+        public Point Location { get; internal set; }
+        public Size Size { get; internal set; }
+        public bool Minimised { get; internal set; }
+        public bool Maximised { get; internal set; }
     }
 }
