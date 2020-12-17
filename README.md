@@ -4,7 +4,7 @@ Steam Account Manager (SAM) is a tool that allows to management mulitple Steam a
 
 ## 💻 Installation
 
-Extract the release to folder and startup the executable.
+Extract the release (.exe) to folder and startup the executable.
 
 ## ⚠️ Warning
 
